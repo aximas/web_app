@@ -14,11 +14,39 @@ $topic = '';
 $topics = selectAll('topics');
 $posts = selectAll('posts');
 $postsWithAuthors = selectAllPostsWithUsers('posts', 'users');
-//    test($postsWithAuthors);
-//    exit();
 
 // for create posts
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['post-create'])) {
+
+//    test(getimagesize($_FILES['post_img']['tmp_name']));
+//    exit();
+    if (!empty($_FILES['post_img']['name'])) {
+        $imgName = rand() . '_' . $_FILES['post_img']['name'];
+        $imgType = $_FILES['post_img']['type'];
+        $imgTemp = $_FILES['post_img']['tmp_name'];
+        $imgSize = $_FILES['post_img']['size'];
+        $destination = ROOT_PATH . "\assets\img\posts\\" . $imgName;
+
+
+        if(strpos($imgType, 'image') === false) {
+            die('Можно загружать только изображения');
+        }
+        elseif ($imgSize > 1048576) {
+            die('Размер изображения не должен превышать 1 Мегабайт');
+        }
+
+        else {
+            $result = move_uploaded_file($imgTemp, $destination);
+        }
+
+        if($result) {
+            $_POST['post_img'] = $imgName;
+        } else {
+            $errMsg = 'Картинку не удалось загрузить на сервер';
+        }
+    } else {
+        $errMsg = 'Картинку не удалось получить';
+    }
 
     $post_title = trim($_POST['post_title']);
     $post_content = trim($_POST['post_content']);
