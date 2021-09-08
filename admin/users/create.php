@@ -58,10 +58,11 @@ include "../../path.php";
                         <label for="exampleInputPassword2" class="form-label">Reply Password</label>
                         <input name="password-second" type="password" class="form-control" id="exampleInputPassword2">
                     </div>
-                    <select class="form-select mt-3" aria-label="Default select example">
-                        <option selected>User</option>
-                        <option value="1">Admin</option>
-                    </select>
+                    <div class="form-check mt-3">
+                        <input name="publish" class="form-check-input mt-0" type="checkbox" id="status-checkbox" value="1"
+                               aria-label="Checkbox toggle status of post">
+                        <label for="status-checkbox" class="mx-2">Admin</label>
+                    </div>
                     <div class="col-12 mt-3">
                         <button class="btn btn-primary" type="submit">Create</button>
                     </div>

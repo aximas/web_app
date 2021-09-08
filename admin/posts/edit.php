@@ -31,20 +31,18 @@ include "../../app/controllers/posts.php"
     <?php include '../../app/include/sidebar-admin.php'; ?>
 
     <div class="posts col-9">
-        <div class="button row">
-            <a href="<?php echo BASE_URL . '/admin/posts/create.php' ?>" class="btn btn-success col-2">Add posts</a>
-            <a href="<?php echo BASE_URL . '/admin/posts/index.php' ?>" class="btn btn-warning col-2">Manage posts</a>
-        </div>
+
         <div class="row title-table">
-            <h2>Add records</h2>
+            <h2>Edit record</h2>
 
         </div>
         <div class="row add-post">
             <div class="col error-message">
                 <!-- Вывод массива с ошибками -->
-                    <?php include "../../app/helps/errorInfo.php"; ?>
+                <?php include "../../app/helps/errorInfo.php"; ?>
             </div>
-            <form action="create.php" method="post" enctype="multipart/form-data">
+            <form action="edit.php" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="id" value="<?=$id; ?>">
                 <div class="col">
                     <input name="post_title" type="text" class="form-control" placeholder="Title"
                            aria-label="Post title" value="<?php echo $post_title ?>">
@@ -61,7 +59,6 @@ include "../../app/controllers/posts.php"
                 </div>
 
                 <select name="post_topic" class="form-select mt-3" aria-label="Default select example">
-                    <option selected>Категория поста</option>
                     <?php
                     foreach ($topics as $key => $topic) :
                         ?>
@@ -69,12 +66,16 @@ include "../../app/controllers/posts.php"
                     <?php endforeach; ?>
                 </select>
                 <div class="form-check mt-3">
-                    <input name="publish" class="form-check-input mt-0" type="checkbox" id="status-checkbox" value="1"
-                           aria-label="Checkbox toggle status of post">
-                    <label for="status-checkbox" class="mx-2">Publish</label>
+                    <?php if( empty($post_status) || $post_status === 0) : ?>
+                        <input name="publish" class="form-check-input mt-0" type="checkbox" id="status-checkbox" aria-label="Checkbox toggle status of post">
+                        <label for="status-checkbox" class="mx-2">Publish</label>
+                    <?php else : ?>
+                        <input name="publish" class="form-check-input mt-0" type="checkbox" id="status-checkbox" aria-label="Checkbox toggle status of post" checked>
+                        <label for="status-checkbox" class="mx-2">Unpublish</label>
+                    <?php endif; ?>
                 </div>
                 <div class="col-6 mt-3">
-                    <button name="post-create" class="btn btn-primary" type="submit">Save post</button>
+                    <button name="edit_post" class="btn btn-primary" type="submit">Save post</button>
                 </div>
             </form>
         </div>
