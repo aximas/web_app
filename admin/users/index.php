@@ -1,5 +1,6 @@
 <?php session_start();
 include "../../path.php";
+include "../../app/controllers/users.php";
 ?>
 <!doctype html>
 <html lang="en">
@@ -27,29 +28,31 @@ include "../../path.php";
 <?php include('../../app/include/header-admin.php'); ?>
 
 <div class="container">
-    <?php include '../../app/include/sidebar-admin.php';?>
+    <?php include '../../app/include/sidebar-admin.php'; ?>
 
     <div class="posts col-9">
-            <div class="button row">
-                <a href="create.php" class="btn btn-success col-2">Add user</a>
-                <a href="index.php" class="btn btn-warning col-2">Manage users</a>
-            </div>
-            <div class="row title-table">
-                <h2>Users control panel </h2>
-                <div class="col-1">ID</div>
-                <div class="col-5">Login</div>
-                <div class="col-2">Role</div>
-                <div class="col-4">Control</div>
-            </div>
-            <div class="row post">
-                <div class="id col-1">1</div>
-                <div class="title col-5">Ravshan</div>
-                <div class="auhor col-2">Admin</div>
-                <div class="edit col-2 red"><a href="">edit Post</a> </div>
-                <div class="del col-2"><a href="">delete Post</a> </div>
-            </div>
+        <div class="button row">
+            <a href="create.php" class="btn btn-success col-2">Add user</a>
+            <a href="index.php" class="btn btn-warning col-2">Manage users</a>
         </div>
+        <div class="row title-table">
+            <h2>Users control panel </h2>
+            <div class="col-1">ID</div>
+            <div class="col-5">Login</div>
+            <div class="col-2">Role</div>
+            <div class="col-4">Control</div>
+        </div>
+        <?php foreach ($users as $key => $user) : ?>
+            <div class="row post">
+                <div class="id col-1"><?= $key + 1; ?></div>
+                <div class="title col-5"><?= $user['user_name']; ?></div>
+                <div class="auhor col-2"><?= ($user['admin']) ? 'Admin' : 'User'; ?></div>
+                <div class="edit col-2 red"><a href="edit.php?edit_id=<?=$user['id']; ?>">edit User</a></div>
+                <div class="del col-2"><a href="index.php?del_user=<?=$user['id']; ?>">delete User</a></div>
+            </div>
+        <?php endforeach; ?>
     </div>
+</div>
 </div>
 
 <?php include('../../app/include/footer.php'); ?>

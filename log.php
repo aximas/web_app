@@ -29,7 +29,8 @@
     <form method="post" action="log.php" class="row justify-content-center my-3">
         <h3>Authorization form</h3>
         <div class="mb-3 col-12 col-md-6 error-message">
-            <p><?php echo $errMsg; ?></p>
+            <!-- Вывод массива с ошибками -->
+            <?php include "app/helps/errorInfo.php"; ?>
         </div>
         <div class="w-100"></div>
         <div class="mb-3 col-12 col-md-6">

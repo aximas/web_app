@@ -1,5 +1,7 @@
 <?php session_start();
 include "../../path.php";
+include "../../app/controllers/users.php";
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -31,14 +33,18 @@ include "../../path.php";
 
     <div class="posts col-9">
             <div class="button row">
-                <a href="<?php echo BASE_URL . '/users/posts/create.php'?>" class="btn btn-success col-2">Add posts</a>
-                <a href="<?php echo BASE_URL . '/users/posts/create.php'?>" class="btn btn-warning col-2">Manage posts</a>
+                <a href="<?php echo BASE_URL . '/admin/users/create.php'?>" class="btn btn-success col-2">Add users</a>
+                <a href="<?php echo BASE_URL . '/admin/users/'?>" class="btn btn-warning col-2">Manage users</a>
             </div>
             <div class="row title-table">
                 <h2>Add users</h2>
 
             </div>
             <div class="row add-post">
+                <div class="col error-message">
+                    <!-- Вывод массива с ошибками -->
+                    <?php include "../../app/helps/errorInfo.php"; ?>
+                </div>
                 <form action="create.php" method="post">
                     <div class="mb-3 col">
                         <label for="formGroupExampleInput" class="form-label">Your login</label>
@@ -59,12 +65,12 @@ include "../../path.php";
                         <input name="password-second" type="password" class="form-control" id="exampleInputPassword2">
                     </div>
                     <div class="form-check mt-3">
-                        <input name="publish" class="form-check-input mt-0" type="checkbox" id="status-checkbox" value="1"
+                        <input name="admin" class="form-check-input mt-0" type="checkbox" id="status-checkbox" value="1"
                                aria-label="Checkbox toggle status of post">
                         <label for="status-checkbox" class="mx-2">Admin</label>
                     </div>
                     <div class="col-12 mt-3">
-                        <button class="btn btn-primary" type="submit">Create</button>
+                        <button name="create-user" class="btn btn-primary" type="submit">Create</button>
                     </div>
                 </form>
             </div>

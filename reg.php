@@ -31,7 +31,8 @@ include 'app/controllers/users.php';
     <form method="post" action="reg.php" class="row justify-content-center my-3">
         <h3>Registration form</h3>
         <div class="mb-3 col-12 col-md-6 error-message">
-            <p><?php echo $errMsg; ?></p>
+            <!-- Вывод массива с ошибками -->
+            <?php include "app/helps/errorInfo.php"; ?>
         </div>
         <div class="w-100"></div>
         <div class="mb-3 col-12 col-md-6">
@@ -58,7 +59,7 @@ include 'app/controllers/users.php';
         <div class="w-100"></div>
         <div class="mb-3 col-12 col-md-6">
             <button name="button-reg" type="submit" class="btn btn-secondary">Register</button>
-            <a href="aut.html">Authorization</a>
+            <a href="log.php">Authorization</a>
         </div>
     </form>
 </div>

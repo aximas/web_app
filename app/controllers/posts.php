@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['post-create'])) {
 }
 
 
-//// edit categories
+//// edit posts
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
     $post = selectOne('posts', ['id' => $_GET['id']]);
 
